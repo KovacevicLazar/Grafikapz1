@@ -1,0 +1,26 @@
+﻿<Window x:Class="PredmetniZadatak1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PredmetniZadatak1"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="800" Width="800">
+    <Grid>
+
+        <Menu HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="794">
+            <Button Content="Ellipse"  Name="EllipseButton" Width="90" Height="38" Click="EllipseButton_Click"/>
+            <Button Content="Rectangle" Name="RectangleButton" Width="90" Height="38" Click="RectangleButton_Click"/>
+            <Button Content="Polygon" Name="PolygonButton" Width="90" Height="38" Click="PolygonButton_Click"/>
+            <Button Content="Image" Name="ImageButton"  Width="90" Height="38" Click="ImageButton_Click"/>
+            <Button Content="Undo" Name="UndoButton"  Width="90" Height="38" Click="UndoButton_Click"/>
+            <Button Content="Redo" Name="RedoButton" Width="90" Height="38" Click="RedoButton_Click"/>
+            <Button Content="Clear" Name="ClearButton" Width="90" Height="38" Click="ClearButton_Click"/>
+        </Menu>
+        <Canvas HorizontalAlignment="Left" Name="PaintCanvas" Background="FloralWhite" Width="794" MouseRightButtonUp="PaintCanvas_MouseRightButtonDown" Margin="0,45,0,0">
+         
+        </Canvas>
+
+    </Grid>
+</Window>
