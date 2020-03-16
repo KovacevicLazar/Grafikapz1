@@ -72,8 +72,10 @@ namespace PredmetniZadatak1
 
         }
 
+        Point start;
         private void PaintCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            start = e.GetPosition(this);
             switch (currShape)
             {
                 case Shapes.NoShape:
@@ -83,6 +85,7 @@ namespace PredmetniZadatak1
                 case Shapes.Ellipse:
                     DrawAEllipse drawAEllipse = new DrawAEllipse();
                     drawAEllipse.ShowDialog();
+                    DrawEllipse(drawAEllipse.Width,drawAEllipse.Height,drawAEllipse.FillColor,drawAEllipse.BorderColor,drawAEllipse.BorderThickness);
                     break;
 
                 case Shapes.Rectangle:
@@ -105,6 +108,29 @@ namespace PredmetniZadatak1
             }
         }
 
-        
+        private void DrawEllipse(double width,double height,string fillcolor,string bordercolor,double borderthickness)
+        {
+            Ellipse newEllipse = new Ellipse()
+            {
+                Stroke = Brushes.Green,
+                Fill = Brushes.Red,
+                StrokeThickness = 4,
+                Height = 10,
+                Width = 10
+            };
+
+            
+            newEllipse.SetValue(Canvas.LeftProperty, start.X);
+            newEllipse.SetValue(Canvas.TopProperty, start.Y - 50);
+            newEllipse.Width = width;
+            newEllipse.Height = height;
+            newEllipse.Fill = new SolidColorBrush(Colors.Red);
+            newEllipse.Stroke = new SolidColorBrush(Colors.Blue);
+            newEllipse.StrokeThickness = borderthickness;
+           
+            PaintCanvas.Children.Add(newEllipse);
+        }
+
+
     }
 }

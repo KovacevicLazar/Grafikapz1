@@ -8,18 +8,18 @@
         WindowStartupLocation="CenterScreen"
         Title="Draw a Ellipse" Height="264.2" Width="247.333">
     <Grid>
-        <Label Content="Horizontal Radius:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,19,0,0" Width="110"/>
-        <Label Content="Verticall Radius: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="105"/>
+        <Label Content="Width:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,19,0,0" Width="105"/>
+        <Label Content="Height: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="105"/>
         <Label Content="Fill Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,81,0,0" Width="105"/>
         <Label Content="Border Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,112,0,0" Width="105"/>
         <Label Content="Border Thickness:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,143,0,0" Width="105"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="120,19,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="105"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="120,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="105"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="120,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="105"/>
-        <ComboBox HorizontalAlignment="Left" Margin="120,81,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <ComboBox HorizontalAlignment="Left" Margin="120,112,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Content="Draw" HorizontalAlignment="Left" Margin="120,194,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox Name="WidthTextBox" HorizontalAlignment="Left" Height="26" Margin="120,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <TextBox Name="HightTextBox" HorizontalAlignment="Left" Height="26" Margin="120,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <TextBox Name="BorderThicknessTextBox" HorizontalAlignment="Left" Height="26" Margin="120,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="105"/>
+        <ComboBox Name="FillColorComboBox" HorizontalAlignment="Left" Margin="120,81,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <ComboBox Name="BorderColorComboBox" HorizontalAlignment="Left" Margin="120,112,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="105" Click="ButtonCancel_Click"/>
+        <Button Content="Draw" HorizontalAlignment="Left" Margin="120,194,0,0" VerticalAlignment="Top" Width="105" Click="ButtonDraw_Click"/>
 
     </Grid>
 </Window>
