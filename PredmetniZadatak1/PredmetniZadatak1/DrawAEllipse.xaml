@@ -14,7 +14,7 @@
         <Label Content="Border Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,112,0,0" Width="105"/>
         <Label Content="Border Thickness:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,143,0,0" Width="105"/>
         <TextBox Name="WidthTextBox" HorizontalAlignment="Left" Height="26" Margin="120,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
-        <TextBox Name="HightTextBox" HorizontalAlignment="Left" Height="26" Margin="120,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <TextBox Name="HeightTextBox" HorizontalAlignment="Left" Height="26" Margin="120,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
         <TextBox Name="BorderThicknessTextBox" HorizontalAlignment="Left" Height="26" Margin="120,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="105"/>
         <ComboBox Name="FillColorComboBox" HorizontalAlignment="Left" Margin="120,81,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
         <ComboBox Name="BorderColorComboBox" HorizontalAlignment="Left" Margin="120,112,0,0" VerticalAlignment="Top" Width="105" Height="26"/>

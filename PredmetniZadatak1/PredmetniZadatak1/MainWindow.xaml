@@ -18,7 +18,7 @@
             <Button Content="Redo" Name="RedoButton" Width="90" Height="38" Click="RedoButton_Click"/>
             <Button Content="Clear" Name="ClearButton" Width="90" Height="38" Click="ClearButton_Click"/>
         </Menu>
-        <Canvas HorizontalAlignment="Left" Name="PaintCanvas" Background="FloralWhite" Width="794" MouseRightButtonUp="PaintCanvas_MouseRightButtonDown" Margin="0,45,0,0">
+        <Canvas HorizontalAlignment="Left" Name="PaintCanvas" Background="FloralWhite" Width="794" MouseLeftButtonDown="PaintCanvas_MouseLeftButtonDown" MouseRightButtonUp="PaintCanvas_MouseRightButtonDown" Margin="0,45,0,0">
          
         </Canvas>
 

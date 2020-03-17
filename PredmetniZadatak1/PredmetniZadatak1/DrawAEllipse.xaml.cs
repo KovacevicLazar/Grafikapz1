@@ -22,9 +22,9 @@ namespace PredmetniZadatak1
         public static List<string> Color;
         private string fillColor;
         private string borderColor;
-        private double height;
-        private double width;
-        private double borderThickness;
+        private double ellipseheight;
+        private double ellipsewidth;
+        private double ellipseborderThickness;
         private bool draw;
         public DrawAEllipse()
         {
@@ -33,6 +33,12 @@ namespace PredmetniZadatak1
             Color.Add("Red");
             Color.Add("Blue");
             Color.Add("Green");
+            Color.Add("Yelow");
+            Color.Add("Pink");
+            Color.Add("Gray");
+            Color.Add("Brown");
+            Color.Add("White");
+            Color.Add("Black");
             FillColor = "";
             BorderColor = "";
             FillColorComboBox.ItemsSource = Color;
@@ -41,9 +47,9 @@ namespace PredmetniZadatak1
 
         public string FillColor { get => fillColor; set => fillColor = value; }
         public string BorderColor { get => borderColor; set => borderColor = value; }
-        public double Height { get => height; set => height = value; }
-        public double Width { get => width; set => width = value; }
-        public double BorderThickness { get => borderThickness; set => borderThickness = value; }
+        public double EllipseHeight { get => ellipseheight; set => ellipseheight = value; }
+        public double EllipseWidth { get => ellipsewidth; set => ellipsewidth = value; }
+        public double EllipseBorderThickness { get => ellipseborderThickness; set => ellipseborderThickness = value; }
         public bool Draw { get => draw; set => draw = value; }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -57,9 +63,9 @@ namespace PredmetniZadatak1
             Draw = true;
             BorderColor = BorderColorComboBox.SelectedItem.ToString();
             FillColor = FillColorComboBox.SelectedItem.ToString();
-            Width = double.Parse(WidthTextBox.Text);
-            Height = double.Parse(HightTextBox.Text);
-            BorderThickness = double.Parse(BorderThicknessTextBox.Text);
+            EllipseWidth = double.Parse(WidthTextBox.Text);
+            EllipseHeight = double.Parse(HeightTextBox.Text);
+            EllipseBorderThickness = double.Parse(BorderThicknessTextBox.Text);
             this.Close();
         }
     }

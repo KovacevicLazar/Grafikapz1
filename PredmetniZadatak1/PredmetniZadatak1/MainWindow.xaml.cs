@@ -30,6 +30,9 @@ namespace PredmetniZadatak1
         // Define the current shape used
         private Shapes currShape;
 
+        Point point;
+        PointCollection polygonPoints = new PointCollection(); //Points for polygon
+
 
         public MainWindow()
         {
@@ -69,13 +72,14 @@ namespace PredmetniZadatak1
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+           
+            PaintCanvas.Children.Clear();
+            
         }
-
-        Point start;
+        
         private void PaintCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            start = e.GetPosition(this);
+            point = e.GetPosition(this);
             switch (currShape)
             {
                 case Shapes.NoShape:
@@ -85,17 +89,24 @@ namespace PredmetniZadatak1
                 case Shapes.Ellipse:
                     DrawAEllipse drawAEllipse = new DrawAEllipse();
                     drawAEllipse.ShowDialog();
-                    DrawEllipse(drawAEllipse.Width,drawAEllipse.Height,drawAEllipse.FillColor,drawAEllipse.BorderColor,drawAEllipse.BorderThickness);
+                    if (drawAEllipse.Draw)
+                    {
+                        DrawEllipse(drawAEllipse.EllipseWidth, drawAEllipse.EllipseHeight, drawAEllipse.FillColor, drawAEllipse.BorderColor, drawAEllipse.EllipseBorderThickness);
+                    }
                     break;
 
                 case Shapes.Rectangle:
                     DrawARectangle drawARectangle = new DrawARectangle();
                     drawARectangle.ShowDialog();
+                    if (drawARectangle.Draw)
+                    {
+                        DrawRectangle(drawARectangle.RectangleWidth, drawARectangle.RectangleHeight, drawARectangle.FillColor, drawARectangle.BorderColor, drawARectangle.RectangleBorderThickness);
+                    }
                     break;
 
                 case Shapes.Polygon:
-                    DrawAPolygon drawAPolygon = new DrawAPolygon();
-                    drawAPolygon.ShowDialog();
+                    point.Y = point.Y - 44;
+                    polygonPoints.Add(point);
                     break;
 
                 case Shapes.Image:
@@ -108,29 +119,112 @@ namespace PredmetniZadatak1
             }
         }
 
+        private void PaintCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DrawAPolygon drawAPolygon = new DrawAPolygon();
+            drawAPolygon.ShowDialog();
+            if (drawAPolygon.Draw)
+            {
+                DrawPolygon(drawAPolygon.FillColor, drawAPolygon.BorderColor, drawAPolygon.PolygonBorderThickness);
+                drawAPolygon.Draw = false;
+            }
+            else
+            {
+                polygonPoints = new PointCollection();
+            }
+        }
+
         private void DrawEllipse(double width,double height,string fillcolor,string bordercolor,double borderthickness)
         {
-            Ellipse newEllipse = new Ellipse()
-            {
-                Stroke = Brushes.Green,
-                Fill = Brushes.Red,
-                StrokeThickness = 4,
-                Height = 10,
-                Width = 10
-            };
-
-            
-            newEllipse.SetValue(Canvas.LeftProperty, start.X);
-            newEllipse.SetValue(Canvas.TopProperty, start.Y - 50);
+            Ellipse newEllipse = new Ellipse();
+          
+            newEllipse.SetValue(Canvas.LeftProperty, point.X);
+            newEllipse.SetValue(Canvas.TopProperty, point.Y - 44);
             newEllipse.Width = width;
             newEllipse.Height = height;
-            newEllipse.Fill = new SolidColorBrush(Colors.Red);
-            newEllipse.Stroke = new SolidColorBrush(Colors.Blue);
+            newEllipse.Fill = getColor(fillcolor);
+            newEllipse.Stroke = getColor(bordercolor);
             newEllipse.StrokeThickness = borderthickness;
            
             PaintCanvas.Children.Add(newEllipse);
         }
 
+        private void DrawRectangle(double width, double height, string fillcolor, string bordercolor, double borderthickness)
+        {
+            Rectangle newRectangle = new Rectangle();
+            
+            newRectangle.SetValue(Canvas.LeftProperty, point.X);
+            newRectangle.SetValue(Canvas.TopProperty, point.Y - 44);
+            newRectangle.Width = width;
+            newRectangle.Height = height;
+            newRectangle.Fill = getColor(fillcolor);
+            newRectangle.Stroke = getColor(bordercolor);
+            newRectangle.StrokeThickness = borderthickness;
 
+            PaintCanvas.Children.Add(newRectangle);
+        }
+
+        private void DrawPolygon(string fillcolor, string bordercolor, double borderthickness)
+        {
+            Polygon newPolygon = new Polygon();
+
+            newPolygon.Fill = getColor(fillcolor);
+            newPolygon.Stroke = getColor(bordercolor);
+            newPolygon.StrokeThickness = borderthickness;
+            newPolygon.Points = polygonPoints;
+
+            PaintCanvas.Children.Add(newPolygon);
+            polygonPoints = new PointCollection();
+        }
+
+            private SolidColorBrush getColor(string color)
+        {
+            SolidColorBrush sb=null;
+
+            switch(color)
+            {
+                case "Red":
+                    sb = new SolidColorBrush(Colors.Red);
+                    break;
+                    
+                case "Blue":
+                    sb = new SolidColorBrush(Colors.Blue);
+                    break;
+
+                case "Green":
+                    sb = new SolidColorBrush(Colors.Green);
+                    break;
+
+                case "Yelow":
+                    sb = new SolidColorBrush(Colors.Yellow);
+                    break;
+
+                case "Pink":
+                    sb = new SolidColorBrush(Colors.Pink);
+                    break;
+
+                case "Gray":
+                    sb = new SolidColorBrush(Colors.Gray);
+                    break;
+
+                case "Brown":
+                    sb = new SolidColorBrush(Colors.Brown);
+                    break;
+
+                case "White":
+                    sb = new SolidColorBrush(Colors.White);
+                    break;
+
+                case "Black":
+                    sb = new SolidColorBrush(Colors.Black);
+                    break;
+            }
+
+            
+
+            return sb;
+        }
+
+        
     }
 }

@@ -6,8 +6,17 @@
         xmlns:local="clr-namespace:PredmetniZadatak1"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Draw a Polygon" Height="450" Width="800">
+        Title="Draw a Polygon" Height="197.2" Width="247.333">
     <Grid>
-        
+
+        <Label Content="Fill Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="105"/>
+        <Label Content="Border Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,49,0,0" Width="105"/>
+        <Label Content="Border Thickness:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0" Width="105"/>
+
+        <TextBox Name="BorderThicknessTextBox" HorizontalAlignment="Left" Height="26" Margin="120,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="105"/>
+        <ComboBox Name="FillColorComboBox" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <ComboBox Name="BorderColorComboBox" HorizontalAlignment="Left" Margin="120,49,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="105" Click="ButtonCancel_Click"/>
+        <Button Content="Draw" HorizontalAlignment="Left" Margin="120,129,0,0" VerticalAlignment="Top" Width="105" Click="ButtonDraw_Click"/>
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\bin\Debug\PredmetniZadatak1.exe.config
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\bin\Debug\PredmetniZadatak1.exe
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\bin\Debug\PredmetniZadatak1.pdb
-C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\PredmetniZadatak1.csprojAssemblyReference.cache
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\MainWindow.g.cs
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\App.g.cs
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\PredmetniZadatak1_MarkupCompile.cache

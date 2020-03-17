@@ -19,9 +19,50 @@ namespace PredmetniZadatak1
     /// </summary>
     public partial class DrawAPolygon : Window
     {
+
+        public static List<string> Color;
+        private string fillColor;
+        private string borderColor;
+        private double polygonBorderThickness;
+        private bool draw;
+
         public DrawAPolygon()
         {
             InitializeComponent();
+            Color = new List<string>();
+            Color.Add("Red");
+            Color.Add("Blue");
+            Color.Add("Green");
+            Color.Add("Yelow");
+            Color.Add("Pink");
+            Color.Add("Gray");
+            Color.Add("Brown");
+            Color.Add("White");
+            Color.Add("Black");
+            FillColor = "";
+            BorderColor = "";
+            FillColorComboBox.ItemsSource = Color;
+            BorderColorComboBox.ItemsSource = Color;
+        }
+
+        public string FillColor { get => fillColor; set => fillColor = value; }
+        public string BorderColor { get => borderColor; set => borderColor = value; }
+        public double PolygonBorderThickness { get => polygonBorderThickness; set => polygonBorderThickness = value; }
+        public bool Draw { get => draw; set => draw = value; }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Draw = false;
+            this.Close();
+        }
+
+        private void ButtonDraw_Click(object sender, RoutedEventArgs e)
+        {
+            Draw = true;
+            BorderColor = BorderColorComboBox.SelectedItem.ToString();
+            FillColor = FillColorComboBox.SelectedItem.ToString();
+            PolygonBorderThickness = double.Parse(BorderThicknessTextBox.Text);
+            this.Close();
         }
     }
 }
