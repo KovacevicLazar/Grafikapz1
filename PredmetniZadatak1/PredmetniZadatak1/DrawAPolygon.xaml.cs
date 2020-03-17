@@ -64,5 +64,6 @@ namespace PredmetniZadatak1
             PolygonBorderThickness = double.Parse(BorderThicknessTextBox.Text);
             this.Close();
         }
+
     }
 }

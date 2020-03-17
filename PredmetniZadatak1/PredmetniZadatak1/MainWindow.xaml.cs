@@ -112,6 +112,10 @@ namespace PredmetniZadatak1
                 case Shapes.Image:
                     DrawAImage drawAImage = new DrawAImage();
                     drawAImage.ShowDialog();
+                    if (drawAImage.Draw)
+                    {
+                        DrawImage(drawAImage.PhotoWidth, drawAImage.PhotoHeight, drawAImage.PhotoFileName);
+                    }
                     break;
 
                 default:
@@ -121,16 +125,19 @@ namespace PredmetniZadatak1
 
         private void PaintCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DrawAPolygon drawAPolygon = new DrawAPolygon();
-            drawAPolygon.ShowDialog();
-            if (drawAPolygon.Draw)
+            if (currShape == Shapes.Polygon)
             {
-                DrawPolygon(drawAPolygon.FillColor, drawAPolygon.BorderColor, drawAPolygon.PolygonBorderThickness);
-                drawAPolygon.Draw = false;
-            }
-            else
-            {
-                polygonPoints = new PointCollection();
+                DrawAPolygon drawAPolygon = new DrawAPolygon();
+                drawAPolygon.ShowDialog();
+                if (drawAPolygon.Draw)
+                {
+                    DrawPolygon(drawAPolygon.FillColor, drawAPolygon.BorderColor, drawAPolygon.PolygonBorderThickness);
+                    drawAPolygon.Draw = false;
+                }
+                else
+                {
+                    polygonPoints = new PointCollection();
+                }
             }
         }
 
@@ -177,7 +184,25 @@ namespace PredmetniZadatak1
             polygonPoints = new PointCollection();
         }
 
-            private SolidColorBrush getColor(string color)
+        private void DrawImage(double width, double height, string photoFileName)
+        {
+            BitmapImage theImage = new BitmapImage
+                (new Uri(photoFileName, UriKind.Relative));
+
+            ImageBrush myImageBrush = new ImageBrush(theImage);
+            
+            Canvas newImage = new Canvas();
+            newImage.SetValue(Canvas.LeftProperty, point.X);
+            newImage.SetValue(Canvas.TopProperty, point.Y - 44);
+            newImage.Width = width;
+            newImage.Height = height;
+            newImage.Background = myImageBrush;
+
+            PaintCanvas.Children.Add(newImage);
+
+        }
+
+        private SolidColorBrush getColor(string color)
         {
             SolidColorBrush sb=null;
 
@@ -219,12 +244,7 @@ namespace PredmetniZadatak1
                     sb = new SolidColorBrush(Colors.Black);
                     break;
             }
-
-            
-
             return sb;
         }
-
-        
     }
 }

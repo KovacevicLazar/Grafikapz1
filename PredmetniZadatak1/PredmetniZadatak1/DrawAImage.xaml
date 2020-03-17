@@ -6,8 +6,17 @@
         xmlns:local="clr-namespace:PredmetniZadatak1"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Draw a Image" Height="450" Width="800">
+        Title="Draw a Image" Height="264.2" Width="247.333">
     <Grid>
-        
+        <Label Content="Width:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,19,0,0" Width="105"/>
+        <Label Content="Height: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="105"/>
+        <TextBox Name="WidthTextBox" HorizontalAlignment="Left" Height="26" Margin="120,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <TextBox Name="HeightTextBox" HorizontalAlignment="Left" Height="26" Margin="120,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <Button Content="Add Photo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="120,81,0,0" Height="20" Click="ButtonAddPhoto_Click"/>
+        <Image Name="Photo" HorizontalAlignment="Left" Height="107" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="105" Click="ButtonCancel_Click"/>
+        <Button Content="Draw" HorizontalAlignment="Left" Margin="120,194,0,0" VerticalAlignment="Top" Width="105" Click="ButtonDraw_Click"/>
+
     </Grid>
 </Window>
