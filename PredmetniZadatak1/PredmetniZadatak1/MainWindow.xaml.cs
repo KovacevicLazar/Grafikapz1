@@ -139,6 +139,43 @@ namespace PredmetniZadatak1
                     polygonPoints = new PointCollection();
                 }
             }
+            else
+            {
+                Shape clickedShape = e.OriginalSource as Shape;
+               
+                if (clickedShape != null)
+                {
+                    if (clickedShape.GetType().Name == Shapes.Image.ToString())
+                    {
+                        DrawAImage drawAImage = new DrawAImage();
+                        drawAImage.AddPhotoButton.IsEnabled = false;
+                        drawAImage.ImageDrawButton.Content = "Apply";
+                        drawAImage.ShowDialog();
+                        if (drawAImage.Draw)
+                        {
+                            clickedShape.Width = drawAImage.Width;
+                            clickedShape.Height = drawAImage.Height;
+                        }
+                    }
+                    else
+                    {
+                        ChangeShapeColor changeShapeColor = new ChangeShapeColor();
+                        changeShapeColor.ShowDialog();
+                        if (changeShapeColor.ApplyChange)
+                        {
+                           // Shape tempShape = clickedShape;
+                           clickedShape.Fill = getColor(changeShapeColor.FillColor);
+                           clickedShape.Stroke = getColor(changeShapeColor.BorderColor);
+                           clickedShape.StrokeThickness = changeShapeColor.ShapeBorderThickness;
+                           //PaintCanvas.Children.Remove(clickedShape);
+                           // PaintCanvas.Children.Add(tempShape);  
+                        }
+                    }
+
+                }
+                
+   
+            }
         }
 
         private void DrawEllipse(double width,double height,string fillcolor,string bordercolor,double borderthickness)
@@ -187,18 +224,25 @@ namespace PredmetniZadatak1
         private void DrawImage(double width, double height, string photoFileName)
         {
             BitmapImage theImage = new BitmapImage
-                (new Uri(photoFileName, UriKind.Relative));
+                (new Uri(photoFileName,UriKind.RelativeOrAbsolute));
 
             ImageBrush myImageBrush = new ImageBrush(theImage);
-            
-            Canvas newImage = new Canvas();
-            newImage.SetValue(Canvas.LeftProperty, point.X);
-            newImage.SetValue(Canvas.TopProperty, point.Y - 44);
-            newImage.Width = width;
-            newImage.Height = height;
-            newImage.Background = myImageBrush;
 
-            PaintCanvas.Children.Add(newImage);
+            
+            Image ImageRectangle = new Image();
+
+            ImageRectangle.SetValue(Canvas.LeftProperty, point.X);
+            ImageRectangle.SetValue(Canvas.TopProperty, point.Y - 44);
+            ImageRectangle.Width = width;
+            ImageRectangle.Height = height;
+            ImageRectangle.Source=  theImage;
+
+
+            PaintCanvas.Children.Add(ImageRectangle);
+
+        }
+        void ImageCanvasRightButtonClick(object sender, MouseButtonEventArgs e)
+        {
 
         }
 

@@ -20,3 +20,5 @@ C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadata
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\DrawAPolygon.baml
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\DrawARectangle.baml
 C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\PredmetniZadatak1.csprojAssemblyReference.cache
+C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\ChangeShapeColor.g.cs
+C:\Users\HP 650 G2\Documents\GitHub\Grafikapz1\PredmetniZadatak1\PredmetniZadatak1\obj\Debug\ChangeShapeColor.baml
