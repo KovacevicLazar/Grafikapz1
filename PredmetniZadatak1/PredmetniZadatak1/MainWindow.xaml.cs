@@ -74,7 +74,8 @@ namespace PredmetniZadatak1
         {
            
             PaintCanvas.Children.Clear();
-            
+            currShape = Shapes.NoShape;
+
         }
         
         private void PaintCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -138,6 +139,8 @@ namespace PredmetniZadatak1
                 {
                     polygonPoints = new PointCollection();
                 }
+                currShape = Shapes.NoShape;
+                
             }
             else
             {
@@ -206,6 +209,7 @@ namespace PredmetniZadatak1
             newRectangle.StrokeThickness = borderthickness;
 
             PaintCanvas.Children.Add(newRectangle);
+            currShape = Shapes.NoShape;
         }
 
         private void DrawPolygon(string fillcolor, string bordercolor, double borderthickness)
@@ -219,6 +223,7 @@ namespace PredmetniZadatak1
 
             PaintCanvas.Children.Add(newPolygon);
             polygonPoints = new PointCollection();
+            currShape = Shapes.NoShape;
         }
 
         private void DrawImage(double width, double height, string photoFileName)
@@ -228,21 +233,53 @@ namespace PredmetniZadatak1
 
             ImageBrush myImageBrush = new ImageBrush(theImage);
 
+            Canvas ImageRectangle = new Canvas();
             
-            Image ImageRectangle = new Image();
-
             ImageRectangle.SetValue(Canvas.LeftProperty, point.X);
             ImageRectangle.SetValue(Canvas.TopProperty, point.Y - 44);
             ImageRectangle.Width = width;
             ImageRectangle.Height = height;
-            ImageRectangle.Source=  theImage;
+            ImageRectangle.Background= myImageBrush;
+            ImageRectangle.MouseLeftButtonDown += new MouseButtonEventHandler(image_MouseLeftButtonDown);
 
-
+            
             PaintCanvas.Children.Add(ImageRectangle);
+            currShape = Shapes.NoShape;
 
         }
-        void ImageCanvasRightButtonClick(object sender, MouseButtonEventArgs e)
+        void image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            Canvas clickedShape = e.OriginalSource as Canvas;
+
+            if (clickedShape != null)
+            {
+                double height = clickedShape.Height;
+                double width = clickedShape.Width;
+
+                string PhotoFileName;
+
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+                dlg.DefaultExt = ".jpg";
+                dlg.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif";
+
+                Nullable<bool> result = dlg.ShowDialog(); //true false null...moze i tip bool? 
+
+                if (result == true)
+                {
+                    PhotoFileName = dlg.FileName;
+                    var uri = new Uri(PhotoFileName);
+                    BitmapImage theImage = new BitmapImage
+                    (new Uri(PhotoFileName, UriKind.RelativeOrAbsolute));
+                    ImageBrush myImageBrush = new ImageBrush(theImage);
+
+                    clickedShape.Height = height;
+                    clickedShape.Width = width;
+                    clickedShape.Background=myImageBrush;
+                    
+                }
+            }
 
         }
 
