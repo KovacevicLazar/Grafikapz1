@@ -43,6 +43,7 @@ namespace PredmetniZadatak1
             Color.Add("Black");
             FillColor = "";
             BorderColor = "";
+            Draw = false;
             FillColorComboBox.ItemsSource = Color;
             BorderColorComboBox.ItemsSource = Color;
         }
@@ -54,21 +55,31 @@ namespace PredmetniZadatak1
         public double RectangleBorderThickness { get => rectangleBorderThickness; set => rectangleBorderThickness = value; }
         public bool Draw { get => draw; set => draw = value; }
 
-        private void Draw_Click(object sender, RoutedEventArgs e)
-        {
-            Draw = true;
-            BorderColor = BorderColorComboBox.SelectedItem.ToString();
-            FillColor = FillColorComboBox.SelectedItem.ToString();
-            RectangleWidth = double.Parse(WidthTextBox.Text);
-            RectangleHeight = double.Parse(HeightTextBox.Text);
-            RectangleBorderThickness = double.Parse(BorderThicknessTextBox.Text);
-            this.Close();
-        }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Draw = false;
             this.Close();
         }
+
+
+        private void Draw_Click(object sender, RoutedEventArgs e)
+        {
+            if(!Double.TryParse(WidthTextBox.Text, out rectangleWidth) || !Double.TryParse(HeightTextBox.Text, out rectangleHeight) || !Double.TryParse(BorderThicknessTextBox.Text, out rectangleBorderThickness) || BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+            }
+            else
+            {
+                Draw = true;
+                BorderColor = BorderColorComboBox.SelectedItem.ToString();
+                FillColor = FillColorComboBox.SelectedItem.ToString();
+                RectangleWidth = double.Parse(WidthTextBox.Text);
+                RectangleHeight = double.Parse(HeightTextBox.Text);
+                RectangleBorderThickness = double.Parse(BorderThicknessTextBox.Text);
+                this.Close();
+            }
+        }
+
     }
 }

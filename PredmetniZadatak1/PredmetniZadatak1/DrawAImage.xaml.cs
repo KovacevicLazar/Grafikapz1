@@ -27,6 +27,7 @@ namespace PredmetniZadatak1
         public DrawAImage()
         {
             InitializeComponent();
+            Draw = false;
         }
 
         public string PhotoFileName { get => photoFileName; set => photoFileName = value; }
@@ -41,7 +42,7 @@ namespace PredmetniZadatak1
             dlg.DefaultExt = ".jpg";
             dlg.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif";
 
-            Nullable<bool> result = dlg.ShowDialog(); //true false null...moze i tip bool? 
+            Nullable<bool> result = dlg.ShowDialog(); //true false null...
 
             if (result == true)
             {
@@ -59,10 +60,18 @@ namespace PredmetniZadatak1
 
         private void ButtonDraw_Click(object sender, RoutedEventArgs e)
         {
-            Draw = true;
-            PhotoWidth = double.Parse(WidthTextBox.Text);
-            PhotoHeight = double.Parse(HeightTextBox.Text);
-            this.Close();
+
+            if (!Double.TryParse(WidthTextBox.Text, out photoWidth) || !Double.TryParse(HeightTextBox.Text, out photoHeight))
+            {
+                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+            }
+            else
+            {
+                Draw = true;
+                //PhotoWidth = double.Parse(WidthTextBox.Text);
+                //PhotoHeight = double.Parse(HeightTextBox.Text);
+                this.Close();
+            }
         }
 
     }

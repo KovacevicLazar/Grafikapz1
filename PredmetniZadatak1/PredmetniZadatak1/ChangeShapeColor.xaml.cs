@@ -41,6 +41,7 @@ namespace PredmetniZadatak1
             Color.Add("Black");
             FillColor = "";
             BorderColor = "";
+            ApplyChange = false;
             FillColorComboBox.ItemsSource = Color;
             BorderColorComboBox.ItemsSource = Color;
         }
@@ -58,11 +59,18 @@ namespace PredmetniZadatak1
 
         private void ButtonDraw_Click(object sender, RoutedEventArgs e)
         {
-            ApplyChange = true;
-            BorderColor = BorderColorComboBox.SelectedItem.ToString();
-            FillColor = FillColorComboBox.SelectedItem.ToString();
-            ShapeBorderThickness = double.Parse(BorderThicknessTextBox.Text);
-            this.Close();
+            if (!Double.TryParse(BorderThicknessTextBox.Text, out shapeBorderThickness) ||  BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+            }
+            else
+            {
+                ApplyChange = true;
+                BorderColor = BorderColorComboBox.SelectedItem.ToString();
+                FillColor = FillColorComboBox.SelectedItem.ToString();
+                //ShapeBorderThickness = double.Parse(BorderThicknessTextBox.Text);
+                this.Close();
+            }
         }
     }
 }

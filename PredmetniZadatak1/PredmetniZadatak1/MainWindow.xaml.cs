@@ -22,7 +22,7 @@ namespace PredmetniZadatak1
     {
 
         // Define enum for all shapes
-        private enum Shapes
+        public enum Shapes
         {
             Ellipse, Rectangle, Polygon, Image, NoShape
         }
@@ -32,7 +32,10 @@ namespace PredmetniZadatak1
 
         Point point;
         PointCollection polygonPoints = new PointCollection(); //Points for polygon
+        UndoRedo undoRedo = new UndoRedo();
+        private List<FrameworkElement> listAllShapes = new List<FrameworkElement>();
 
+        public List<FrameworkElement> ListAllShapes { get => listAllShapes; set => listAllShapes = value; }
 
         public MainWindow()
         {
@@ -53,6 +56,7 @@ namespace PredmetniZadatak1
         private void PolygonButton_Click(object sender, RoutedEventArgs e)
         {
             currShape = Shapes.Polygon;
+            polygonPoints = new PointCollection();
         }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -62,20 +66,23 @@ namespace PredmetniZadatak1
 
         private void UndoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            undoRedo.Undo(this);
         }
 
         private void RedoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            undoRedo.Redo(this);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            PaintCanvas.Children.Clear();
+            if (PaintCanvas.Children.Count != 0)
+            {
+                undoRedo.InsertAllShapeforUndoRedo(ListAllShapes);
+                ListAllShapes.Clear();
+                PaintCanvas.Children.Clear();
+            }
             currShape = Shapes.NoShape;
-
         }
         
         private void PaintCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -84,7 +91,7 @@ namespace PredmetniZadatak1
             switch (currShape)
             {
                 case Shapes.NoShape:
-                    MessageBox.Show("Niste izabrali oblik");
+                    MessageBox.Show("Niste izabrali oblik","Greska");
                     break;
 
                 case Shapes.Ellipse:
@@ -137,10 +144,10 @@ namespace PredmetniZadatak1
                 }
                 else
                 {
-                    polygonPoints = new PointCollection();
+                    // polygonPoints.Clear(); 
+                    polygonPoints = new PointCollection(); //mora ovako, jer cemo imati vise poligona
                 }
                 currShape = Shapes.NoShape;
-                
             }
             else
             {
@@ -148,36 +155,20 @@ namespace PredmetniZadatak1
                
                 if (clickedShape != null)
                 {
-                    if (clickedShape.GetType().Name == Shapes.Image.ToString())
+                    
+                    ChangeShapeColor changeShapeColor = new ChangeShapeColor();
+                    changeShapeColor.BorderThicknessTextBox.Text = clickedShape.StrokeThickness.ToString();
+                    changeShapeColor.ShowDialog();
+                    if (changeShapeColor.ApplyChange)
                     {
-                        DrawAImage drawAImage = new DrawAImage();
-                        drawAImage.AddPhotoButton.IsEnabled = false;
-                        drawAImage.ImageDrawButton.Content = "Apply";
-                        drawAImage.ShowDialog();
-                        if (drawAImage.Draw)
-                        {
-                            clickedShape.Width = drawAImage.Width;
-                            clickedShape.Height = drawAImage.Height;
-                        }
-                    }
-                    else
-                    {
-                        ChangeShapeColor changeShapeColor = new ChangeShapeColor();
-                        changeShapeColor.ShowDialog();
-                        if (changeShapeColor.ApplyChange)
-                        {
-                           // Shape tempShape = clickedShape;
-                           clickedShape.Fill = getColor(changeShapeColor.FillColor);
-                           clickedShape.Stroke = getColor(changeShapeColor.BorderColor);
-                           clickedShape.StrokeThickness = changeShapeColor.ShapeBorderThickness;
-                           //PaintCanvas.Children.Remove(clickedShape);
-                           // PaintCanvas.Children.Add(tempShape);  
-                        }
-                    }
-
+                        // Shape tempShape = clickedShape;
+                        clickedShape.Fill = getColor(changeShapeColor.FillColor);
+                        clickedShape.Stroke = getColor(changeShapeColor.BorderColor);
+                        clickedShape.StrokeThickness = changeShapeColor.ShapeBorderThickness;
+                        //PaintCanvas.Children.Remove(clickedShape);
+                        // PaintCanvas.Children.Add(tempShape);  
+                    }  
                 }
-                
-   
             }
         }
 
@@ -194,6 +185,10 @@ namespace PredmetniZadatak1
             newEllipse.StrokeThickness = borderthickness;
            
             PaintCanvas.Children.Add(newEllipse);
+            ListAllShapes.Add(newEllipse);
+            currShape = Shapes.NoShape;
+
+            undoRedo.InsertShapeforUndoRedo(newEllipse);
         }
 
         private void DrawRectangle(double width, double height, string fillcolor, string bordercolor, double borderthickness)
@@ -209,7 +204,10 @@ namespace PredmetniZadatak1
             newRectangle.StrokeThickness = borderthickness;
 
             PaintCanvas.Children.Add(newRectangle);
+            ListAllShapes.Add(newRectangle);
             currShape = Shapes.NoShape;
+           
+            undoRedo.InsertShapeforUndoRedo(newRectangle);
         }
 
         private void DrawPolygon(string fillcolor, string bordercolor, double borderthickness)
@@ -222,31 +220,37 @@ namespace PredmetniZadatak1
             newPolygon.Points = polygonPoints;
 
             PaintCanvas.Children.Add(newPolygon);
-            polygonPoints = new PointCollection();
+            ListAllShapes.Add(newPolygon);
+            //polygonPoints.Clear();
+            polygonPoints = new PointCollection(); //mora ovako, jer cemo imati vise poligona
             currShape = Shapes.NoShape;
+           
+            undoRedo.InsertShapeforUndoRedo(newPolygon);
         }
 
         private void DrawImage(double width, double height, string photoFileName)
         {
-            BitmapImage theImage = new BitmapImage
-                (new Uri(photoFileName,UriKind.RelativeOrAbsolute));
+            BitmapImage theImage = new BitmapImage(new Uri(photoFileName,UriKind.RelativeOrAbsolute));
 
             ImageBrush myImageBrush = new ImageBrush(theImage);
 
-            Canvas ImageRectangle = new Canvas();
+            Canvas ImageCanvas = new Canvas();
             
-            ImageRectangle.SetValue(Canvas.LeftProperty, point.X);
-            ImageRectangle.SetValue(Canvas.TopProperty, point.Y - 44);
-            ImageRectangle.Width = width;
-            ImageRectangle.Height = height;
-            ImageRectangle.Background= myImageBrush;
-            ImageRectangle.MouseLeftButtonDown += new MouseButtonEventHandler(image_MouseLeftButtonDown);
+            ImageCanvas.SetValue(Canvas.LeftProperty, point.X);
+            ImageCanvas.SetValue(Canvas.TopProperty, point.Y - 44);
+            ImageCanvas.Width = width;
+            ImageCanvas.Height = height;
+            ImageCanvas.Background= myImageBrush;
+            ImageCanvas.MouseLeftButtonDown += new MouseButtonEventHandler(image_MouseLeftButtonDown);
 
             
-            PaintCanvas.Children.Add(ImageRectangle);
+            PaintCanvas.Children.Add(ImageCanvas);
+            ListAllShapes.Add(ImageCanvas);
             currShape = Shapes.NoShape;
-
+           
+            undoRedo.InsertShapeforUndoRedo(ImageCanvas);
         }
+
         void image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -256,7 +260,6 @@ namespace PredmetniZadatak1
             {
                 double height = clickedShape.Height;
                 double width = clickedShape.Width;
-
                 string PhotoFileName;
 
                 Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -264,28 +267,25 @@ namespace PredmetniZadatak1
                 dlg.DefaultExt = ".jpg";
                 dlg.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif";
 
-                Nullable<bool> result = dlg.ShowDialog(); //true false null...moze i tip bool? 
+                Nullable<bool> result = dlg.ShowDialog(); //true false null
 
                 if (result == true)
                 {
                     PhotoFileName = dlg.FileName;
                     var uri = new Uri(PhotoFileName);
-                    BitmapImage theImage = new BitmapImage
-                    (new Uri(PhotoFileName, UriKind.RelativeOrAbsolute));
+                    BitmapImage theImage = new BitmapImage(new Uri(PhotoFileName, UriKind.RelativeOrAbsolute));
                     ImageBrush myImageBrush = new ImageBrush(theImage);
 
                     clickedShape.Height = height;
                     clickedShape.Width = width;
                     clickedShape.Background=myImageBrush;
-                    
                 }
             }
-
         }
 
         private SolidColorBrush getColor(string color)
         {
-            SolidColorBrush sb=null;
+            SolidColorBrush sb = null;
 
             switch(color)
             {

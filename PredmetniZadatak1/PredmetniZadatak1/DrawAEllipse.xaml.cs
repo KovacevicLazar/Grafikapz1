@@ -41,6 +41,7 @@ namespace PredmetniZadatak1
             Color.Add("Black");
             FillColor = "";
             BorderColor = "";
+            Draw = false;
             FillColorComboBox.ItemsSource = Color;
             BorderColorComboBox.ItemsSource = Color;
         }
@@ -60,13 +61,20 @@ namespace PredmetniZadatak1
 
         private void ButtonDraw_Click(object sender, RoutedEventArgs e)
         {
-            Draw = true;
-            BorderColor = BorderColorComboBox.SelectedItem.ToString();
-            FillColor = FillColorComboBox.SelectedItem.ToString();
-            EllipseWidth = double.Parse(WidthTextBox.Text);
-            EllipseHeight = double.Parse(HeightTextBox.Text);
-            EllipseBorderThickness = double.Parse(BorderThicknessTextBox.Text);
-            this.Close();
+            if (!Double.TryParse(WidthTextBox.Text, out ellipsewidth) || !Double.TryParse(HeightTextBox.Text, out ellipseheight) || !Double.TryParse(BorderThicknessTextBox.Text, out ellipseborderThickness) || BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+            }
+            else
+            {
+                Draw = true;
+                BorderColor = BorderColorComboBox.SelectedItem.ToString();
+                FillColor = FillColorComboBox.SelectedItem.ToString();
+                //EllipseWidth = double.Parse(WidthTextBox.Text);
+                //EllipseHeight = double.Parse(HeightTextBox.Text);
+                //EllipseBorderThickness = double.Parse(BorderThicknessTextBox.Text);
+                this.Close();
+            }
         }
     }
 }
