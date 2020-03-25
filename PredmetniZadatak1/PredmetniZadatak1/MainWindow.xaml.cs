@@ -91,7 +91,7 @@ namespace PredmetniZadatak1
             switch (currShape)
             {
                 case Shapes.NoShape:
-                    MessageBox.Show("Niste izabrali oblik","Greska");
+                    MessageBox.Show("Niste izabrali oblik!","Greška");
                     break;
 
                 case Shapes.Ellipse:
@@ -113,7 +113,7 @@ namespace PredmetniZadatak1
                     break;
 
                 case Shapes.Polygon:
-                    point.Y = point.Y - 44;
+                    point.Y = point.Y - 45;
                     polygonPoints.Add(point);
                     break;
 
@@ -145,7 +145,7 @@ namespace PredmetniZadatak1
                 else
                 {
                     // polygonPoints.Clear(); 
-                    polygonPoints = new PointCollection(); //mora ovako, jer cemo imati vise poligona
+                    polygonPoints = new PointCollection();
                 }
                 currShape = Shapes.NoShape;
             }
@@ -161,12 +161,14 @@ namespace PredmetniZadatak1
                     changeShapeColor.ShowDialog();
                     if (changeShapeColor.ApplyChange)
                     {
+                        listAllShapes.Remove(clickedShape);
                         // Shape tempShape = clickedShape;
                         clickedShape.Fill = getColor(changeShapeColor.FillColor);
                         clickedShape.Stroke = getColor(changeShapeColor.BorderColor);
                         clickedShape.StrokeThickness = changeShapeColor.ShapeBorderThickness;
                         //PaintCanvas.Children.Remove(clickedShape);
                         // PaintCanvas.Children.Add(tempShape);  
+                        listAllShapes.Add(clickedShape);
                     }  
                 }
             }
@@ -177,7 +179,7 @@ namespace PredmetniZadatak1
             Ellipse newEllipse = new Ellipse();
           
             newEllipse.SetValue(Canvas.LeftProperty, point.X);
-            newEllipse.SetValue(Canvas.TopProperty, point.Y - 44);
+            newEllipse.SetValue(Canvas.TopProperty, point.Y - 45);
             newEllipse.Width = width;
             newEllipse.Height = height;
             newEllipse.Fill = getColor(fillcolor);
@@ -196,7 +198,7 @@ namespace PredmetniZadatak1
             Rectangle newRectangle = new Rectangle();
             
             newRectangle.SetValue(Canvas.LeftProperty, point.X);
-            newRectangle.SetValue(Canvas.TopProperty, point.Y - 44);
+            newRectangle.SetValue(Canvas.TopProperty, point.Y - 45);
             newRectangle.Width = width;
             newRectangle.Height = height;
             newRectangle.Fill = getColor(fillcolor);
@@ -222,7 +224,7 @@ namespace PredmetniZadatak1
             PaintCanvas.Children.Add(newPolygon);
             ListAllShapes.Add(newPolygon);
             //polygonPoints.Clear();
-            polygonPoints = new PointCollection(); //mora ovako, jer cemo imati vise poligona
+            polygonPoints = new PointCollection();
             currShape = Shapes.NoShape;
            
             undoRedo.InsertShapeforUndoRedo(newPolygon);
@@ -237,7 +239,7 @@ namespace PredmetniZadatak1
             Canvas ImageCanvas = new Canvas();
             
             ImageCanvas.SetValue(Canvas.LeftProperty, point.X);
-            ImageCanvas.SetValue(Canvas.TopProperty, point.Y - 44);
+            ImageCanvas.SetValue(Canvas.TopProperty, point.Y - 45);
             ImageCanvas.Width = width;
             ImageCanvas.Height = height;
             ImageCanvas.Background= myImageBrush;
@@ -275,10 +277,11 @@ namespace PredmetniZadatak1
                     var uri = new Uri(PhotoFileName);
                     BitmapImage theImage = new BitmapImage(new Uri(PhotoFileName, UriKind.RelativeOrAbsolute));
                     ImageBrush myImageBrush = new ImageBrush(theImage);
-
+                    listAllShapes.Remove(clickedShape);
                     clickedShape.Height = height;
                     clickedShape.Width = width;
                     clickedShape.Background=myImageBrush;
+                    listAllShapes.Add(clickedShape);
                 }
             }
         }

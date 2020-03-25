@@ -67,16 +67,13 @@ namespace PredmetniZadatak1
         {
             if(!Double.TryParse(WidthTextBox.Text, out rectangleWidth) || !Double.TryParse(HeightTextBox.Text, out rectangleHeight) || !Double.TryParse(BorderThicknessTextBox.Text, out rectangleBorderThickness) || BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+                MessageBox.Show("Proverite da li su sva polja ispravno popunjena i pokušajte ponovo.");
             }
             else
             {
                 Draw = true;
                 BorderColor = BorderColorComboBox.SelectedItem.ToString();
                 FillColor = FillColorComboBox.SelectedItem.ToString();
-                RectangleWidth = double.Parse(WidthTextBox.Text);
-                RectangleHeight = double.Parse(HeightTextBox.Text);
-                RectangleBorderThickness = double.Parse(BorderThicknessTextBox.Text);
                 this.Close();
             }
         }

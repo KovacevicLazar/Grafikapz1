@@ -63,7 +63,7 @@ namespace PredmetniZadatak1
 
             if (!Double.TryParse(WidthTextBox.Text, out photoWidth) || !Double.TryParse(HeightTextBox.Text, out photoHeight))
             {
-                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+                MessageBox.Show("Proverite da li su sva polja ispravno popunjena i pokušajte ponovo.");
             }
             else
             {

@@ -63,7 +63,7 @@ namespace PredmetniZadatak1
         {
             if (!Double.TryParse(WidthTextBox.Text, out ellipsewidth) || !Double.TryParse(HeightTextBox.Text, out ellipseheight) || !Double.TryParse(BorderThicknessTextBox.Text, out ellipseborderThickness) || BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+                MessageBox.Show("Proverite da li su sva polja ispravno popunjena i pokušajte ponovo.");
             }
             else
             {

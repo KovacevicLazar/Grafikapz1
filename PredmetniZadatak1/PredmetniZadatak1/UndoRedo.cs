@@ -17,9 +17,9 @@ namespace PredmetniZadatak1
 
     class UndoRedo : IUndoRedo
     {
-        private FrameworkElement UndoShape = new FrameworkElement();
+        private List<FrameworkElement> UndoShape = new  List<FrameworkElement>();
         private List<FrameworkElement> UndoClearShapes = new List<FrameworkElement>();
-        private FrameworkElement RedoShape = new FrameworkElement();
+        private List<FrameworkElement> RedoShape = new List<FrameworkElement>();
         private ActionType actionType;
 
         public void InsertAllShapeforUndoRedo(List<FrameworkElement> shapesForUndoRedo)
@@ -33,26 +33,24 @@ namespace PredmetniZadatak1
 
         public void InsertShapeforUndoRedo(FrameworkElement dataobject)
         { 
-            UndoShape = dataobject;
+            UndoShape.Add(dataobject);
             actionType = ActionType.CreateShape;
         }
 
         public void Redo(MainWindow mainWindow)
         {
-            
-            if (actionType == ActionType.DeleteShape && RedoShape != null)
+            if (RedoShape.Count() != 0)
             {
-                 mainWindow.PaintCanvas.Children.Add(RedoShape);
-                 UndoShape = RedoShape;
-                 RedoShape = null;
-                 actionType = ActionType.CreateShape;
+                mainWindow.PaintCanvas.Children.Add(RedoShape[RedoShape.Count() - 1]);
+                mainWindow.ListAllShapes.Add(RedoShape[RedoShape.Count() - 1]);
+                UndoShape.Add(RedoShape[RedoShape.Count() - 1]);
+                RedoShape.Remove(RedoShape[RedoShape.Count() - 1]);
             }
-
         }
 
         public void Undo(MainWindow mainWindow)
         {
-            if (actionType == ActionType.ClearCanvas)
+            if (actionType == ActionType.ClearCanvas && UndoClearShapes.Count()!=0)
             {
                 foreach(var shape in UndoClearShapes)
                 {
@@ -62,14 +60,14 @@ namespace PredmetniZadatak1
                 UndoClearShapes.Clear();
                 actionType = ActionType.NoActon;
             }
-            else if (actionType == ActionType.CreateShape)
+            else
             {
-                if (UndoShape != null)
+                if (UndoShape.Count() != 0)
                 {
-                    mainWindow.PaintCanvas.Children.Remove(UndoShape);
-                    actionType = ActionType.DeleteShape;
-                    RedoShape = UndoShape;
-                    UndoShape = null;
+                    mainWindow.PaintCanvas.Children.Remove(UndoShape[UndoShape.Count() - 1]);
+                    mainWindow.ListAllShapes.Remove(UndoShape[UndoShape.Count() - 1]);
+                    RedoShape.Add(UndoShape[UndoShape.Count() - 1]);
+                    UndoShape.Remove(UndoShape[UndoShape.Count() - 1]);
                 }
             }
         }

@@ -61,7 +61,7 @@ namespace PredmetniZadatak1
         {
             if(!Double.TryParse(BorderThicknessTextBox.Text, out polygonBorderThickness) || BorderColorComboBox.SelectedIndex == -1 || FillColorComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Provetite da li su sva polja popunjena i pokusajte ponovo.");
+                MessageBox.Show("Proverite da li su sva polja ispravno popunjena i pokušajte ponovo.");
             }
             else
             {

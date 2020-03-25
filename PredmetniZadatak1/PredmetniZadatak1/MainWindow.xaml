@@ -6,19 +6,19 @@
         xmlns:local="clr-namespace:PredmetniZadatak1"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="900" Width="1000">
     <Grid>
 
-        <Menu HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="794">
-            <Button Content="Ellipse"  Name="EllipseButton" Width="90" Height="38" Click="EllipseButton_Click"/>
-            <Button Content="Rectangle" Name="RectangleButton" Width="90" Height="38" Click="RectangleButton_Click"/>
-            <Button Content="Polygon" Name="PolygonButton" Width="90" Height="38" Click="PolygonButton_Click"/>
-            <Button Content="Image" Name="ImageButton"  Width="90" Height="38" Click="ImageButton_Click"/>
-            <Button Content="Undo" Name="UndoButton"  Width="90" Height="38" Click="UndoButton_Click"/>
-            <Button Content="Redo" Name="RedoButton" Width="90" Height="38" Click="RedoButton_Click"/>
-            <Button Content="Clear" Name="ClearButton" Width="90" Height="38" Click="ClearButton_Click"/>
+        <Menu HorizontalAlignment="Left" Height="45" Background="DimGray" VerticalAlignment="Top" Width="992">
+            <Button Content="Ellipse" FontWeight="Bold" Name="EllipseButton" Width="100" Height="38" Click="EllipseButton_Click"/>
+            <Button Content="Rectangle" FontWeight="Bold" Name="RectangleButton" Width="100" Height="38" Click="RectangleButton_Click"/>
+            <Button Content="Polygon" FontWeight="Bold" Name="PolygonButton" Width="100" Height="38" Click="PolygonButton_Click"/>
+            <Button Content="Image" FontWeight="Bold" Name="ImageButton"  Width="100" Height="38" Click="ImageButton_Click"/>
+            <Button Content="Undo" FontWeight="Bold" Name="UndoButton"  Width="100" Height="38" Click="UndoButton_Click"/>
+            <Button Content="Redo" FontWeight="Bold"  Name="RedoButton" Width="100" Height="38" Click="RedoButton_Click"/>
+            <Button Content="Clear" FontWeight="Bold" x:Name="ClearButton" Width="100" Height="38" Click="ClearButton_Click"/>
         </Menu>
-        <Canvas HorizontalAlignment="Left" Name="PaintCanvas" Background="FloralWhite" Width="794" MouseLeftButtonDown="PaintCanvas_MouseLeftButtonDown" MouseRightButtonUp="PaintCanvas_MouseRightButtonDown" Margin="0,45,0,0">
+        <Canvas HorizontalAlignment="Left" Name="PaintCanvas" Background="FloralWhite" Width="992" MouseLeftButtonDown="PaintCanvas_MouseLeftButtonDown" MouseRightButtonUp="PaintCanvas_MouseRightButtonDown" Margin="0,45,0,0">
          
         </Canvas>
 
